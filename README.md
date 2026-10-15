@@ -2,6 +2,36 @@
 
 面向在校大学生的刷题系统。支持**用户登录**、**服务端题库**、**多设备进度同步**，也可在无服务端时降级为纯本地模式使用。
 
+## 界面预览
+
+**首页** —— 每日目标进度环、复习提醒、学科掌握度一览：
+
+![首页](docs/screenshots/01-home.png)
+
+**答题页** —— KaTeX 公式渲染、即时判分与解析、个人笔记：
+
+![答题页](docs/screenshots/02-quiz.png)
+
+**知识点掌握度** —— 72 个知识点的彩色热力图，点击可专项练习：
+
+![知识点热力图](docs/screenshots/03-knowledge.png)
+
+**学习统计** —— 近 14 天答题量、学科正确率：
+
+![学习统计](docs/screenshots/04-stats.png)
+
+**今日复习** —— 间隔重复调度，按遗忘曲线安排：
+
+![今日复习](docs/screenshots/05-review.png)
+
+**模拟考成绩单** —— 得分环与逐题解析：
+
+![成绩单](docs/screenshots/06-exam-result.png)
+
+**深色模式**：
+
+![深色模式](docs/screenshots/07-dark.png)
+
 **核心特性**
 
 - 零运行时依赖 —— 只用 Node.js 内置模块，不需要 `npm install` 即可运行

@@ -503,12 +503,39 @@ check("公式渲染：定界符识别正确", () => {
     ["\\(a+b\\)", true],
     ["\\[a+b\\]", true],
     ["普通文本没有公式", false],
-    ["价格是 $5 元", false]     // $ 后跟数字不应识别为公式
+    /*
+     * 纯数字公式必须被识别 —— 数学题选项大量使用 $0$、$1$ 这类写法。
+     * 此前的规则「$ 后不能是数字」把这些也拦掉了，导致选项渲染失败
+     * （由 docs/screenshots/02-quiz.png 截图发现）。
+     */
+    ["$0$", true],
+    ["$1$", true],
+    /* 无配对的裸 $ 不算公式，避免「价格 $5」误判 */
+    ["价格是 $5 元", false],
+    ["成本 5$ 左右", false]
   ];
   cases.forEach(([text, expect]) => {
     const got = R.hasMath(text);
     if (got !== expect) throw new Error(`「${text}」期望 hasMath=${expect}，实际 ${got}`);
   });
+});
+
+check("公式渲染：纯数字公式能渲染（回归 $0$/$1$ 选项 bug）", () => {
+  /*
+   * 这是 docs/screenshots/02-quiz.png 暴露的 bug 的回归测试：
+   * 选项 "$0$" "$1$" 显示为原始文本而非公式。
+   *
+   * 断言分两种环境（此前写错，无 KaTeX 时误报失败）：
+   *   - KaTeX 已加载：$0$ 应渲染为 .katex 结构，不再含原始 $0$ 文本
+   *   - KaTeX 未加载：按设计降级为转义原文，此时验证内容不丢失
+   */
+  const out = R.rich("$0$");
+  if (R.hasKatex()) {
+    if (out.includes("$0$")) throw new Error(`KaTeX 已加载但 $0$ 仍为原文，输出「${out.slice(0, 80)}」`);
+    if (!out.includes("katex")) throw new Error(`未产出 katex 结构：${out.slice(0, 80)}`);
+  } else {
+    if (!out.includes("0")) throw new Error(`降级路径丢失内容：${out}`);
+  }
 });
 
 check("公式渲染：题干中的公式被正确包裹", () => {
