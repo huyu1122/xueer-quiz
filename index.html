@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>学而刷题 · 大学生在线刷题系统</title>
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-theme="light">
+
+<!-- ============ 顶部导航 ============ -->
+<header class="topbar">
+  <div class="topbar-inner">
+
+    <!-- 左上角：返回首页按钮 + 品牌 -->
+    <div class="topbar-left">
+      <button class="home-btn" id="homeBtn" title="返回首页（快捷键 H）">
+        <span class="home-btn-icon">⌂</span>
+        <span class="home-btn-text">返回首页</span>
+      </button>
+      <div class="brand" data-nav="home">
+        <span class="brand-logo">学</span>
+        <span class="brand-text">
+          <strong>学而刷题</strong>
+          <small>大学生在线题库</small>
+        </span>
+      </div>
+    </div>
+
+    <nav class="nav" id="mainNav">
+      <button class="nav-item is-active" data-nav="home">首页</button>
+      <button class="nav-item" data-nav="review">复习<span class="badge" id="navDueBadge">0</span></button>
+      <button class="nav-item" data-nav="practice">练习</button>
+      <button class="nav-item" data-nav="exam">模拟考</button>
+      <button class="nav-item" data-nav="wrong">错题本<span class="badge" id="navWrongBadge">0</span></button>
+      <button class="nav-item" data-nav="favorite">收藏<span class="badge" id="navFavBadge">0</span></button>
+      <button class="nav-item" data-nav="notes">笔记<span class="badge" id="navNoteBadge">0</span></button>
+      <button class="nav-item" data-nav="stats">统计</button>
+      <button class="nav-item" data-nav="knowledge">知识点</button>
+    </nav>
+
+    <div class="topbar-right">
+      <!-- 未登录 -->
+      <button class="btn btn-sm btn-primary" id="loginBtn">登录 / 注册</button>
+      <!-- 已登录（默认隐藏） -->
+      <div class="user-chip hidden" id="userChip">
+        <span class="user-avatar" id="userAvatar">学</span>
+        <span class="user-name" id="userName"></span>
+        <button class="user-menu-btn" id="userMenuBtn" title="账户菜单">▾</button>
+        <div class="user-menu hidden" id="userMenu">
+          <div class="user-menu-head">
+            <div class="fw-600" id="menuNickname"></div>
+            <div class="text-xs text-3" id="menuUsername"></div>
+          </div>
+          <button class="user-menu-item" data-nav="stats">学习统计</button>
+          <button class="user-menu-item" data-nav="settings">设置</button>
+          <button class="user-menu-item" id="syncNow">立即同步进度</button>
+          <div class="user-menu-sep"></div>
+          <button class="user-menu-item is-danger" id="logoutBtn">退出登录</button>
+        </div>
+      </div>
+      <span class="mode-chip" id="modeChip" title="当前数据存储方式">本地模式</span>
+      <button class="icon-btn" id="themeToggle" title="切换深色 / 浅色模式">🌙</button>
+      <button class="icon-btn" data-nav="settings" title="设置">⚙️</button>
+    </div>
+
+  </div>
+</header>
+
+<main class="app" id="app"><!-- 视图由 JS 渲染 --></main>
+
+<footer class="footer">
+  <span>学而刷题 v2.0 · <span id="footerMode">数据保存在浏览器本地</span></span>
+  <span id="footerStat"></span>
+</footer>
+
+<!-- 全局提示条 -->
+<div class="toast" id="toast"></div>
+
+<script src="js/questions.js"></script>
+<script src="js/merge.js"></script>
+<script src="js/render.js"></script>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="js/api.js"></script>
+<script src="js/store.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

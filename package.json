@@ -1,0 +1,33 @@
+{
+  "name": "xueer-quiz",
+  "version": "3.1.0",
+  "description": "学而刷题 —— 面向在校大学生的刷题系统（前端 + Node 服务端，支持公式渲染与间隔重复）",
+  "private": true,
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node server/server.js --port 3000",
+    "test": "node test/validate.js && node test/smoke.js && node test/robust.test.js && node test/katex.test.js && node test/loadorder.test.js && node test/launcher.test.js && node test/notes.test.js && node test/perf.test.js && node test/sync.test.js && node test/server.test.js && node test/e2e.js && node test/browser.test.js",
+    "test:bank": "node test/validate.js",
+    "test:ui": "node test/smoke.js",
+    "test:robust": "node test/robust.test.js",
+    "test:katex": "node test/katex.test.js",
+    "test:load": "node test/loadorder.test.js",
+    "test:launcher": "node test/launcher.test.js",
+    "test:notes": "node test/notes.test.js",
+    "test:perf": "node test/perf.test.js",
+    "test:sync": "node test/sync.test.js",
+    "test:server": "node test/server.test.js",
+    "test:e2e": "node test/e2e.js",
+    "test:browser": "node test/browser.test.js",
+    "audit:perf": "node tools/perf-audit.js",
+    "knowledge:apply": "node tools/add-knowledge.js",
+    "knowledge:check": "node tools/analyze-knowledge.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "ws": "^8.22.0"
+  }
+}

@@ -1,0 +1,55 @@
+# ============================================================
+#  Git 行尾与文件属性
+#
+#  为什么需要这个文件：不同平台默认的行尾不同（Windows CRLF、
+#  Unix LF）。若不显式声明，克隆到别的系统后可能出现：
+#    - .cmd 变成 LF → cmd.exe 解析失败（批处理必须 CRLF）
+#    - 无意义的「整个文件都改了」diff
+#
+#  这里统一：默认 LF，但批处理文件强制 CRLF。
+# ============================================================
+
+# 默认：检出时使用 LF，提交时也存为 LF
+* text=auto eol=lf
+
+# ------------------------------------------------------------
+# Windows 批处理必须使用 CRLF，否则 cmd.exe 报语法错误。
+#
+# 这里用 -text（不做任何转换，按字节原样存储）而非 eol=crlf：
+#   eol=crlf 会把文件以 LF 存进仓库，仅在检出时转成 CRLF。
+#   但用户从 GitHub 下载 ZIP 时不一定经过该转换，可能拿到 LF 而无法运行。
+#   用 -text 可保证仓库、检出、ZIP 下载三处都是 CRLF。
+#
+# 若有人误将其改为 LF，test/launcher.test.js 会检测到并报错。
+# ------------------------------------------------------------
+*.cmd -text
+*.bat -text
+
+# 明确指定为文本的文件
+*.js    text
+*.json  text
+*.md    text
+*.css   text
+*.html  text
+*.yml   text
+*.yaml  text
+
+# 二进制文件不要做行尾转换，也不要尝试 diff
+*.woff2 binary
+*.woff  binary
+*.ttf   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.zip   binary
+*.7z    binary
+*.exe   binary
+
+# 让 git diff 把 KaTeX 压缩产物视为二进制，避免刷屏
+vendor/katex/katex.min.js  -diff
+vendor/katex/katex.min.css -diff
+
+# 语言统计：把测试与工具也识别为 JavaScript
+*.js linguist-language=JavaScript
