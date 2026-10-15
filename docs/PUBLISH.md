@@ -2,6 +2,27 @@
 
 本文档说明如何把「学而刷题」发布到 GitHub。
 
+> **当前状态**：本地仓库**已准备完毕**（分支 `main`，首次提交已完成，身份已配置）。
+> 你只需在 GitHub 上创建空仓库，然后执行下面的「步骤 4」推送即可。
+
+---
+
+## 你的推送命令
+
+假设仓库名为 `xueer-quiz`（可自行更改）：
+
+```bash
+cd quiz-system
+git remote add origin https://github.com/huyu1122/xueer-quiz.git
+git push -u origin main
+```
+
+> 已配置的提交身份：`huyu1122 <huyu1122@users.noreply.github.com>`
+> —— 使用 GitHub 隐私邮箱，你的 QQ 邮箱不会出现在公开的提交历史中。
+
+推送时若要求认证，**密码栏需填 Personal Access Token**（GitHub 已不支持密码推送），
+获取方式见下方「步骤 4」。
+
 ---
 
 ## 一、上传前必须知道的两件事
@@ -33,56 +54,34 @@ git status --ignored
    （本地已有这些文件，勾选会导致首次推送冲突）
 4. 点击 Create repository
 
-### 步骤 2：配置 Git 身份（仅首次）
+### 步骤 2：配置 Git 身份 ✅ 已完成
 
 ```bash
-git config --global user.name "你的名字"
-git config --global user.email "你的邮箱"
+# 已为本仓库配置（未使用 --global，不影响其他项目）
+# user.name  = huyu1122
+# user.email = huyu1122@users.noreply.github.com
 ```
 
-> 建议在 GitHub 的 Settings → Emails 中开启
-> "Keep my email addresses private"，并使用 GitHub 提供的
-> `xxxxx@users.noreply.github.com` 作为提交邮箱，避免真实邮箱被公开。
+### 步骤 3：初始化并提交 ✅ 已完成
 
-### 步骤 3：初始化并提交
+本地仓库已初始化（分支 `main`），首次提交包含 62 个文件：
 
-在 `quiz-system` 目录下执行：
-
-```bash
-git init
-git branch -M main
-
-# 先确认哪些文件会被提交（此时应看不到 server/data 与 node_modules）
-git add -A
-git status
-
-# 确认无误后提交
-git commit -m "feat: 学而刷题 —— 大学生在线刷题系统
-
-- 100 道题 / 12 学科 / 48 章节，四种题型
-- 用户登录（scrypt 加盐哈希 + 会话管理 + 防爆破）
-- 服务端题库与多设备进度同步（合并式写入，零丢失）
-- 间隔重复复习（简化版 SM-2）
-- 知识点掌握度热力图
-- 个人笔记与每日目标
-- 数学公式渲染（内置 KaTeX）
-- 一键启动器（自动找 Node、自动开浏览器、端口顺延）
-- 514 项自动化测试（含真实浏览器交互测试）"
+```
+d74ca58  feat: 学而刷题 —— 大学生在线刷题系统
 ```
 
 ### 步骤 4：关联远程仓库并推送
 
 ```bash
-# 把 <你的用户名> 和 <仓库名> 换成实际值
-git remote add origin https://github.com/<你的用户名>/<仓库名>.git
+git remote add origin https://github.com/huyu1122/<仓库名>.git
 git push -u origin main
 ```
 
-若提示需要认证，GitHub 已不支持密码推送，需用 **Personal Access Token**：
+若提示需要认证，需用 **Personal Access Token**：
 
 1. 打开 <https://github.com/settings/tokens>
 2. Generate new token (classic) → 勾选 `repo` 权限 → 生成
-3. 推送时用户名填 GitHub 用户名，密码栏粘贴该 token
+3. 推送时用户名填 `huyu1122`，密码栏粘贴该 token
 
 ---
 
